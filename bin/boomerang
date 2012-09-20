@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+var boomerang = require('../lib/boomerang');
+var options   = { port: process.env.PORT || 3000 };
+boomerang.createServer(options);

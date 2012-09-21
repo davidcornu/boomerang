@@ -2,7 +2,7 @@ _        = require('underscore')
 express  = require('express')
 http     = require('http')
 request  = require('request')
-stripper = require('./boomerang/stripper')
+filter   = require('./boomerang/filter')
 
 class Boomerang
 
@@ -33,7 +33,7 @@ class Boomerang
       headers: _(req.headers).pick(@proxiedHeaders...)
       body: req.body
 
-    stripper.naiveStrip(request(options), res)
+    filter.naive(request(options), res)
 
 exports.createServer = (options) ->
   return new Boomerang(options)

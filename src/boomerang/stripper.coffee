@@ -2,11 +2,10 @@ naiveFilter = (text) ->
   text
     .replace(/<script[^>]*>[\S\s]*?<\/script>/g, '')
     .replace(/<style[^>]*>[\S\s]*?<\/style>/g, '')
-    .replace(/<link(\s?rel\s?=\s?['"]stylesheet['"]\s?)?[^\>]*>/g, '')
+    .replace(/<link(rel\s?=['"]\s?stylesheet\s?['"]|[^>])*\/>/g, '')
     .replace(/style\s?=\s?("[^"]*"|'[^']*')/g, '')
 
 exports.naiveStrip = (input, output) ->
-
   buffer = ""
 
   input.on 'data', (buf) ->
@@ -15,3 +14,5 @@ exports.naiveStrip = (input, output) ->
   input.on 'end', ->
     output.write(naiveFilter(buffer))
     output.end()
+
+# exports.strip = (input, output) ->

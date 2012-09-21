@@ -24,11 +24,11 @@ class Boomerang
     @app.configure 'development', =>
       @app.use express.errorHandler()
 
-    @app.all('/blog*', @proxyRequest)
+    @app.all(['/blog','/blog/*'], @proxyRequest)
 
   proxyRequest: (req, res) =>
     options =
-      uri: 'http://blog.busbud.com' + req.params[0],
+      uri: 'http://blog.busbud.com' + req.params[0].replace(/\/blog/, ''),
       method: req.method
       headers: _(req.headers).pick(@proxiedHeaders...)
       body: req.body

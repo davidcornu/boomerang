@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "author": "David Cornu <david@davidcornu.com>",
   "description": "Proxies the Busbud blog so it can be served under a different URL",
+  "bin": {
+    "boomerang": "./bin/boomerang"
+  },
+  "main": "./lib/boomerang",
   "repository": {
     "type": "git",
     "url": "https://github.com/davidcornu/boomerang"

@@ -24,16 +24,17 @@ class Boomerang
     @app.configure 'development', =>
       @app.use express.errorHandler()
 
-    @app.all(['/blog','/blog/*'], @proxyRequest)
+    @app.all(['/blog','/blog/*'], @proxyRequest) # Avoids matching paths that start with 'blog'
 
-  proxyRequest: (req, res) =>
+  proxyRequest: (req, res) ->
     options =
-      uri: 'http://blog.busbud.com' + req.params[0].replace(/\/blog/, ''),
-      method: req.method
+      uri: 'http://blog.busbud.com' + req.params[0].replace(/\/blog/, '') # params[0] includes the entire request path
       headers: _(req.headers).pick(@proxiedHeaders...)
-      body: req.body
+      method: req.method
 
-    filter.naive(request(options), res)
+    options['body'] = req.body if req.body # Only present for POST/PUT requests
+
+    filter.dom(request(options), res) # Output of request is piped to the response
 
 exports.createServer = (options) ->
   return new Boomerang(options)

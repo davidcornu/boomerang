@@ -12,8 +12,7 @@ class Boomerang
     _(@options).extend
       port: 3000
     @app     = express()
-    @server  = http.createServer(@app).listen @options.port, =>
-      console.log "Boomerang listening on port #{@options.port}"
+    @server  = http.createServer(@app).listen(@options.port)
     @configure()
 
   configure: ->

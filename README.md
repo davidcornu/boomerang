@@ -29,3 +29,10 @@ var boomerang = require('boomerang');
 var options = { port: 3000 };
 boomerang.createServer(options); # returns an instance of Boomerang
 ```
+
+## Development
+
+Boomerang uses [Jake](https://github.com/mde/jake) to simplify regular tasks.
+
+- `$ jake build` builds [CoffeeScript](http://coffeescript.org/) files from the `/src` directory into the `/lib` directory.
+- `$ jake test` runs the [Mocha](http://visionmedia.github.com/mocha/) test suite.

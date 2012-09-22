@@ -32,7 +32,16 @@ boomerang.createServer(options); # returns an instance of Boomerang
 
 ## Development
 
+Setup
+
+```
+$ npm install -g jake
+$ npm install
+```
+
 Boomerang uses [Jake](https://github.com/mde/jake) to simplify regular tasks.
+Note that although Jake is included in `package.json` for version reference,
+it is much more convenient to install it globally.
 
 - `$ jake build` builds [CoffeeScript](http://coffeescript.org/) files from the `/src` directory into the `/lib` directory.
 - `$ jake test` runs the [Mocha](http://visionmedia.github.com/mocha/) test suite.

@@ -17,10 +17,10 @@ class Boomerang
 
   configure: ->
     @app.configure =>
-      @app.use express.logger('dev')
       @app.use @app.router
 
     @app.configure 'development', =>
+      @app.use express.logger('dev')
       @app.use express.errorHandler()
 
     @app.all(['/blog','/blog/*'], @proxyRequest) # Avoids matching paths that start with 'blog'

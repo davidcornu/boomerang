@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "author": "David Cornu <david@davidcornu.com>",
   "description": "Proxies the Busbud blog so it can be served under a different URL",
+  "preferGlobal": true,
   "bin": {
     "boomerang": "./bin/boomerang"
   },

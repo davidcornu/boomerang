@@ -18,7 +18,7 @@ and is backed by
 Command-line
 
 ```
-$ npm install git@github.com:davidcornu/boomerang.git
+$ npm install "git+ssh://git@github.com/davidcornu/boomerang.git#v0.1.0"
 $ PORT=3000 boomerang
 ```
 

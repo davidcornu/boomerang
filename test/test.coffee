@@ -10,7 +10,7 @@ address   = "http://localhost:#{port}"
 
 describe 'Boomerang', ->
 
-  vars = {} # Force CoffeeScript variable declaration
+  vars = {} # Get around CoffeeScript's scoping
 
   before (done) ->
     @timeout(5000)
@@ -44,6 +44,11 @@ describe 'Boomerang', ->
       assert(response.statusCode == 404)
       done()
 
+  it 'should not attempt to filter non-html content', (done) ->
+    request address + '/blog/feed', (error, response, body) ->
+      assert(response.statusCode == 200)
+      done()
+
   describe 'filter', ->
     before (done) ->
       # Speed things up a little
@@ -69,7 +74,37 @@ describe 'Boomerang', ->
     it 'should remove stylesheet references', ->
       doc = vars.jsdom.window.document
       intruderCount = 0
-      for intruder in doc.getElementsByTagName('link')
-        if intruder.getAttribute('rel') == 'stylesheet'
+      for element in doc.getElementsByTagName('link')
+        if element.getAttribute('rel') == 'stylesheet'
+          intruderCount += 1
+      assert(intruderCount == 0)
+
+    it 'should remove iframes', ->
+      doc = vars.jsdom.window.document
+      intruderCount = 0
+      assert(doc.getElementsByTagName('iframe').length == 0)
+
+    it 'should remove inline styles', ->
+      doc = vars.jsdom.window.document
+      intruderCount = 0
+      for element in doc.getElementsByTagName('*')
+        intruderCount += 1 if element.getAttribute('style')
+      assert(intruderCount == 0)
+
+    it 'should rewrite full links', ->
+      doc = vars.jsdom.window.document
+      intruderCount = 0
+      for element in doc.getElementsByTagName('a')
+        href = element.getAttribute('href')
+        if href && (/https?:\/\/blog.busbud.com/i).test(href)
+          intruderCount += 1
+      assert(intruderCount == 0)
+
+    it 'should rewrite absolute links', ->
+      doc = vars.jsdom.window.document
+      intruderCount = 0
+      for element in doc.getElementsByTagName('a')
+        href = element.getAttribute('href')
+        if href && href.indexOf('/') == 0 && href.indexOf('/blog') != 0
           intruderCount += 1
       assert(intruderCount == 0)

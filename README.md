@@ -11,11 +11,13 @@ rewriting any absolute and relative links to point to the new location.
     - `<iframe>`
     - Inline `style` attributes
 
-and is backed by
+is backed by
 
 - [Express](http://expressjs.com/) for convenience
 - [jsdom](https://github.com/tmpvar/jsdom) for parsing and filtering
 - [Request](https://github.com/mikeal/request) for networking
+
+and is hosted at http://busbud-boomerang.herokuapp.com/blog for demo purposes.
 
 ## Usage
 

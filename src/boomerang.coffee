@@ -1,3 +1,4 @@
+_        = require('lodash')
 express  = require('express')
 http     = require('http')
 request  = require('request')

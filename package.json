@@ -13,6 +13,7 @@
     "url": "https://github.com/davidcornu/boomerang"
   },
   "dependencies" : {
+    "lodash": "0.7.x",
     "express": "3.0.x",
     "request": "2.11.4",
     "jsdom": "0.2.x"

@@ -3,7 +3,7 @@
 A layer-7 proxy for the [Busbud](http://busbud.com) [blog](http://blog.busbud.com) which
 
 - Serves content from `http://blog.busbud.com` from any host under the `/blog` path,
-rewriting any full and absolute links to point to the new location.
+rewriting any absolute and relative links to point to the new location.
 - Removes the following elements:
     - `<style>`
     - `<link rel='stylesheet'>`

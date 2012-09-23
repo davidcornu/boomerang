@@ -91,7 +91,7 @@ describe 'Boomerang', ->
         intruderCount += 1 if element.getAttribute('style')
       assert(intruderCount == 0)
 
-    it 'should rewrite full links', ->
+    it 'should rewrite absolute links', ->
       doc = vars.jsdom.window.document
       intruderCount = 0
       for element in doc.getElementsByTagName('a')
@@ -100,7 +100,7 @@ describe 'Boomerang', ->
           intruderCount += 1
       assert(intruderCount == 0)
 
-    it 'should rewrite absolute links', ->
+    it 'should rewrite relative links', ->
       doc = vars.jsdom.window.document
       intruderCount = 0
       for element in doc.getElementsByTagName('a')

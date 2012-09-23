@@ -8,16 +8,15 @@ exports.filter = (html, callback) ->
     ProcessExternalResources: false
     QuerySelector: false
 
-  stylesheetRxp = /stylesheet/i
-  localLinkRxp  = /https?:\/\/blog.busbud.com/i
-
   jsdom.env html, (errors, window) ->
+    localLinkRxp  = /https?:\/\/blog.busbud.com/i
+
     for element in window.document.getElementsByTagName('*')
       switch element.tagName
         when 'STYLE', 'SCRIPT', 'IFRAME'
           element.parentNode.removeChild(element)
         when 'LINK'
-          if stylesheetRxp.test(element.getAttribute('rel'))
+          if (/stylesheet/i).test(element.getAttribute('rel'))
             element.parentNode.removeChild(element)
         when 'A'
           href = element.getAttribute('href')

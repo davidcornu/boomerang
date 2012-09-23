@@ -1,11 +1,15 @@
 # Boomerang
 
-A layer-7 proxy for the [Busbud](http://busbud.com) [blog](http://blog.busbud.com) which:
+A layer-7 proxy for the [Busbud](http://busbud.com) [blog](http://blog.busbud.com) which
 
-- Serves content from `http://blog.busbud.com` from any host under the `/blog` path
-- Removes `<style>` blocks
-- Removes `<link rel='stylesheet'>` blocks
-- Removes `<script>` blocks
+- Serves content from `http://blog.busbud.com` from any host under the `/blog` path,
+rewriting any full and absolute links to point to the new location.
+- Removes the following elements:
+    - `<style>`
+    - `<link rel='stylesheet'>`
+    - `<script>`
+    - `<iframe>`
+    - Inline `style` attributes
 
 and is backed by
 
@@ -43,5 +47,6 @@ Boomerang uses [Jake](https://github.com/mde/jake) to simplify regular tasks.
 Note that although Jake is included in `package.json` for version reference,
 it is much more convenient to install it globally.
 
-- `$ jake build` builds [CoffeeScript](http://coffeescript.org/) files from the `/src` directory into the `/lib` directory.
+- `$ jake build` builds [CoffeeScript](http://coffeescript.org/) files from the
+`/src` directory into the `/lib` directory.
 - `$ jake test` runs the [Mocha](http://visionmedia.github.com/mocha/) test suite.

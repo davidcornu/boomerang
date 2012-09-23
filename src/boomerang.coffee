@@ -2,7 +2,7 @@ _        = require('underscore')
 express  = require('express')
 http     = require('http')
 request  = require('request')
-filter   = require('./boomerang/filter')
+filter   = require('./boomerang/filter').filter
 
 class Boomerang
 
@@ -16,12 +16,11 @@ class Boomerang
     @configure()
 
   configure: ->
+    isDevelopment = process.env['NODE_ENV'] != 'production'
     @app.configure =>
+      @app.use express.logger('dev') if isDevelopment
       @app.use @app.router
-
-    @app.configure 'development', =>
-      @app.use express.logger('dev')
-      @app.use express.errorHandler()
+      @app.use express.errorHandler() if isDevelopment
 
     @app.all(['/blog','/blog/*'], @proxyRequest) # Avoids matching paths that start with 'blog'
 
@@ -33,7 +32,16 @@ class Boomerang
 
     options['body'] = req.body if req.body # Only present for POST/PUT requests
 
-    filter.dom(request(options), res) # Output of request is piped to the response
+    request options, (error, response, body) ->
+      return next(error) if error
+      res.statusCode = response.statusCode
+      for header, value of response.headers
+        res.setHeader(header, value)
+
+      if (/text\/html/i).test(response.headers['content-type'])
+        filter(body, (clean) -> res.end(clean))
+      else # Don't blow up for rss requests
+        res.end(body)
 
 exports.createServer = (options) ->
   return new Boomerang(options)

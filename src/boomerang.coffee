@@ -1,4 +1,3 @@
-_        = require('underscore')
 express  = require('express')
 http     = require('http')
 request  = require('request')
@@ -9,8 +8,7 @@ class Boomerang
   proxiedHeaders: ['cache-control', 'user-agent', 'accept', 'accept-language', 'cookie']
 
   constructor: (@options = {}) ->
-    _(@options).extend
-      port: 3000
+    @options['port'] ?= 3000
     @app     = express()
     @server  = http.createServer(@app).listen(@options.port)
     @configure()

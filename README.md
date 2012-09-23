@@ -24,7 +24,7 @@ and is hosted at http://busbud-boomerang.herokuapp.com/blog for demo purposes.
 Command-line
 
 ```
-$ npm install "git+ssh://git@github.com/davidcornu/boomerang.git#master"
+$ npm install -g "git+ssh://git@github.com/davidcornu/boomerang.git#master"
 $ PORT=3000 boomerang
 ```
 

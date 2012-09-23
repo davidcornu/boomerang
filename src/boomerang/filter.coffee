@@ -1,6 +1,5 @@
 jsdom = require('jsdom')
 
-# A much better implementation using JSDom
 exports.filter = (html, callback) ->
   # Prevent any additional resources from being loaded for both speed and
   # security reasons.

@@ -51,4 +51,4 @@ it is much more convenient to install it globally.
 
 - `$ jake build` builds [CoffeeScript](http://coffeescript.org/) files from the
 `/src` directory into the `/lib` directory.
-- `$ jake test` runs the [Mocha](http://visionmedia.github.com/mocha/) test suite.
+- `$ jake test` runs the [Mocha](http://mochajs.org/) test suite.
